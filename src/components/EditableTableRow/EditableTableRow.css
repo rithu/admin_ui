@@ -1,0 +1,13 @@
+.saveButton{
+    background-color: rgb(6, 165, 104);
+    border: none;
+    color: white;
+    margin-right: 1rem;
+   
+}
+.cancelButton{
+  
+    background-color: rgb(71, 82, 94);
+    border: none;
+    color: white;
+}

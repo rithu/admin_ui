@@ -1,0 +1,23 @@
+.pageNoButton{
+    background-color: #0c8ce0;
+    border: none;
+    border-radius: 80%;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 3rem 1rem;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+.pageNoButton:hover {
+    background-color: #ffffff;
+    border: #0c8ce0 solid;
+    color: rgb(6, 97, 158);
+    box-shadow: #0c8ce0;
+  }
+  .pageNoButton:focus{
+    background-color: #ffffff;
+    border: #0c8ce0 solid;
+    color: rgb(6, 97, 158);
+  }

@@ -1,0 +1,9 @@
+.searchBox{
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 100%;
+    background: #f6f8f6;
+    margin-top: 3rem;
+}

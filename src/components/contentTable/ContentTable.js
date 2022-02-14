@@ -80,8 +80,14 @@ function ContentTable() {
     newUsers.splice(index,1);
     setData(newUsers)
   }
-
+  const handleDeleteSelectedClick=(userId) =>{
+    const newUsers=[...data];
+    const index=data.findIndex((obj)=>obj.id===userId)
+    newUsers.splice(index,1);
+    setData(newUsers)
+  }
   const totalRows = data.length;
+  var noOfFilteredRows = 0;
   const rowsPerPage = 10;
   const indexOfLastData = currentPage*rowsPerPage;
   const indexOfFirstData = indexOfLastData - rowsPerPage;
@@ -95,6 +101,22 @@ function ContentTable() {
 
        setSearchQuery(searchTerm)
      }
+     const handleSelectAll=(e)=>{
+       const selectedUserIds = []
+       if(data.id===selectedUserIds){
+       
+        
+       }
+       else{
+         
+
+       }
+       return selectedUserIds
+
+     }
+     const handleSelectOne=()=>{
+
+     }
     
   
     return (
@@ -105,7 +127,7 @@ function ContentTable() {
         
            <thead>
   <tr>
-
+    <th> <input type="checkbox" onChange={(e) => {handleSelectAll(e)}} name="selectAll"/> </th>
     <th>Name</th>
     <th>Email</th>
     <th>Role</th>
@@ -114,16 +136,19 @@ function ContentTable() {
   </tr>
   </thead>
   <tbody> 
-        {   currentPageData.filter(val=>
+        {
+          // if searchQuery is there execute this:
+        searchQuery?(data.filter(val=>
         {if(searchQuery===""){return val }
         else if(val.name.toLowerCase().includes(searchQuery.toLowerCase())||
         val.email.toLowerCase().includes(searchQuery.toLowerCase())||
         val.role.toLowerCase().includes(searchQuery.toLowerCase())){
+          noOfFilteredRows++;
           return val
           } else {
             return 0;
           }
-        }).map((obj)=>(
+        }).slice(indexOfFirstData,indexOfLastData).map((obj)=>(
 
       <>  
             <tr>
@@ -131,20 +156,46 @@ function ContentTable() {
           
             {(editUserId === obj.id) ? (<EditableTableRow editFormData={editFormData} 
             handleEditFormChange={handleEditFormChange}
-            handleCancelClick={handleCancelClick}/>): 
+            handleCancelClick={handleCancelClick}
+            handleSelectOne={handleSelectOne}/>): 
             (<ReadOnlyRow 
               obj = {obj} 
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}
+            handleSelectOne={handleSelectOne}
             
             /> )}   
             </tr>       
       </>  
-        ))} 
+        )))
+        : //if searchQuery is not there execute these:
+        (currentPageData.map((obj)=>(
+
+      <>  
+            <tr>
+
+          
+            {(editUserId === obj.id) ? (<EditableTableRow editFormData={editFormData} 
+            handleEditFormChange={handleEditFormChange}
+            handleCancelClick={handleCancelClick}
+            handleSelectOne={handleSelectOne}/>): 
+            (<ReadOnlyRow 
+              obj = {obj} 
+            handleEditClick={handleEditClick}
+            handleDeleteClick={handleDeleteClick}
+            handleSelectOne={handleSelectOne}
+            
+            /> )}   
+            </tr>       
+      </>  
+        )))} 
   </tbody>
   </table>
   </form>
-    <Pagination handlePageNoClick={handlePageNoClick} totalRows={totalRows} rowsPerPage={rowsPerPage}/>
+  <div className='sideBySide'>
+  <button type='button' onClick={()=>{handleDeleteSelectedClick()}} className="deleteSelectedButton">Delete Selected</button> 
+  <Pagination handlePageNoClick={handlePageNoClick} totalRows={searchQuery?noOfFilteredRows:totalRows} rowsPerPage={rowsPerPage}/>
+  </div> 
 
   </div>
           

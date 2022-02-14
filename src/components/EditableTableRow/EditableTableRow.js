@@ -1,10 +1,14 @@
 import React from 'react'
 import './EditableTableRow.css'
 
-function EditableTableRow({editFormData, handleEditFormChange, handleCancelClick}) {
+function EditableTableRow({editFormData, handleEditFormChange, handleCancelClick, handleSelectOne}) {
     return (
       <>
-         
+          <td>
+              <input type="checkbox" 
+              onChange={(e) => {handleSelectOne(e)}} 
+              name="selectOne"/>
+         </td>
           <td>
               <input 
               type="text" 

@@ -1,10 +1,10 @@
 import React from 'react'
 import './ReadOnlyRow.css'
 
-function ReadOnlyRow({obj,handleEditClick,handleDeleteClick}) {
+function ReadOnlyRow({obj,handleEditClick,handleDeleteClick,handleSelectOne}) {
     return (
       <>
-
+    <td><input type="checkbox" onChange={(e) => {handleSelectOne(e)}} name="selectOne"/></td>
     <td>{obj.name}</td>
     <td>{obj.email}</td>
     <td>{obj.role}</td>
